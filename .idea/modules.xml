@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/CharchingStation.iml" filepath="$PROJECT_DIR$/.idea/CharchingStation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataCollectionDispatcher/DataCollectionDispatcher.iml" filepath="$PROJECT_DIR$/DataCollectionDispatcher/DataCollectionDispatcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataCollectionReceiver/DataCollectionReceiver.iml" filepath="$PROJECT_DIR$/DataCollectionReceiver/DataCollectionReceiver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaFX/JavaFX.iml" filepath="$PROJECT_DIR$/JavaFX/JavaFX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PDFGenerator/PDFGenerator.iml" filepath="$PROJECT_DIR$/PDFGenerator/PDFGenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpringBoot/SpringBoot.iml" filepath="$PROJECT_DIR$/SpringBoot/SpringBoot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StationDataCollector/StationDataCollector.iml" filepath="$PROJECT_DIR$/StationDataCollector/StationDataCollector.iml" />
+    </modules>
+  </component>
+</project>

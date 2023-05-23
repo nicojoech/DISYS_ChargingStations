@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="JavaFX" />
+        <module name="StationDataCollector" />
+        <module name="DataCollectionDispatcher" />
+        <module name="DataCollectionReceiver" />
+        <module name="SpringBoot" />
+        <module name="PDFGenerator" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DataCollectionDispatcher" target="17" />
+      <module name="DataCollectionReceiver" target="17" />
+      <module name="JavaFX" target="17" />
+      <module name="PDFGenerator" target="17" />
+      <module name="SpringBoot" target="17" />
+      <module name="StationDataCollector" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SpringBoot" options="-parameters" />
+    </option>
+  </component>
+</project>
