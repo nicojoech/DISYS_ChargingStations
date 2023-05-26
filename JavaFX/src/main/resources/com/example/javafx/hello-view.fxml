@@ -5,12 +5,15 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.javafx.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+
+    <TextField fx:id="customerId" promptText="add Customer ID" layoutX="364.0" layoutY="150.0" prefHeight="26.0" prefWidth="353.0" />
+    <Button text="Generate Invoice" onAction="#generateInvoice"/>
+    <Label fx:id="invoiceText"/>
 </VBox>
