@@ -15,5 +15,6 @@
 
     <TextField fx:id="customerId" promptText="add Customer ID" layoutX="364.0" layoutY="150.0" prefHeight="26.0" prefWidth="353.0" />
     <Button text="Generate Invoice" onAction="#generateInvoice"/>
+    <Button text="Get Invoice" onAction="#getInvoice"/>
     <Label fx:id="invoiceText"/>
 </VBox>

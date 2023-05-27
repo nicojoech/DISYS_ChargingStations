@@ -1,17 +1,27 @@
 package com.example.springboot;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class InvoiceController {
 
-    @PostMapping("invoices/{customerId")
-    public String generateInvoice(@PathVariable String customerId){
-        System.out.println(customerId);
+    @PostMapping("/invoices")
+    public Long generateInvoice(@RequestBody Invoice invoice) {
+        Long customerId = invoice.getCustomerId();
 
-        return "got it";
+        //Invoice generieren mit anderen Services
+
+        return customerId;
     }
+    @GetMapping("/invoices/{customerId}")
+    public Long getInvoice(@PathVariable Long customerId) {
+
+        System.out.println("Invoice abfragen für " + customerId);
+
+        //Invoice abfragen
+
+        return customerId;
+    }
+
 
 }
