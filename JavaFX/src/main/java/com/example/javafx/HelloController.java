@@ -13,13 +13,8 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Map;
 
 public class HelloController {
     @FXML
@@ -37,6 +32,9 @@ public class HelloController {
         HttpResponse<String> response = HttpClient.newBuilder()
                 .build()
                 .send(request, HttpResponse.BodyHandlers.ofString());
+        String fileContent = response.body();
+        System.out.println(fileContent);
+
     }
 
     @FXML
@@ -78,6 +76,7 @@ public class HelloController {
 
             // Antwort ausgeben
             System.out.println("Response Code: " + responseCode);
+
             System.out.println("Generating Invoice for Customer Id: " + response.toString());
             invoiceText.setText("Generating Invoice for Customer Id: " + response.toString());
         } catch (Exception e) {
