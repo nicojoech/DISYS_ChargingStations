@@ -25,7 +25,7 @@ public class HelloController {
     protected void generateInvoice() throws URISyntaxException, IOException, InterruptedException {
         try {
             //URL des Empfängers
-            String url = "http://localhost:8080/invoices";
+            String url = "http://localhost:8081/invoices";
 
             // Erstelle eine Verbindung
             URL obj = new URL(url);
@@ -72,7 +72,7 @@ public class HelloController {
     @FXML
     protected void getInvoice() throws URISyntaxException, IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:8080/invoices/" + customerId.getText()))
+                .uri(new URI("http://localhost:8081/invoices/" + customerId.getText()))
                 .GET()
                 .build();
 
