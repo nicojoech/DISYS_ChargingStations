@@ -63,7 +63,7 @@ public class InvoiceController {
         File invoiceFile = new File(filePathString);
 
         // check the availability, if not available return HTTP 404
-        if (!invoiceFile.exists()) {
+       /* if (!invoiceFile.exists()) {
         //if (!checkPdfAvailability(filePathString)) {
             System.out.println("Nicht verfügbar");
 
@@ -72,33 +72,41 @@ public class InvoiceController {
                     HttpStatus.NOT_FOUND, "entity not found"
             );
 
-        }
+        }*/
 
         try {
 
-            byte[] invoiceContent = Files.readAllBytes(path);
+            //byte[] invoiceContent = Files.readAllBytes(path);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", customerId + ".pdf");
+            HttpStatus status;
 
-            //LocalDateTime creationTime = LocalDateTime.now();
+            if (invoiceFile.exists()) {
+                headers.setContentType(MediaType.APPLICATION_PDF);
+                headers.setContentDispositionFormData("attachment", customerId + ".pdf");
 
-            BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
+                //LocalDateTime creationTime = LocalDateTime.now();
 
-            // Convert FileTime to LocalDateTime
-            Instant instant = attributes.creationTime().toInstant();
-            LocalDateTime creationTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
 
-            //Set Time Format and format the time
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss, dd.MM.yyyy");
-            String formattedCreationTime = creationTime.format(formatter);
+                // Convert FileTime to LocalDateTime
+                Instant instant = attributes.creationTime().toInstant();
+                LocalDateTime creationTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
 
-            headers.set("creationTime", formattedCreationTime);
-            headers.set("filePath", filePathString);
+                //Set Time Format and format the time
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss, dd.MM.yyyy");
+                String formattedCreationTime = creationTime.format(formatter);
+
+                //Set headers to return the informaions
+                headers.set("creationTime", formattedCreationTime);
+                headers.set("filePath", filePathString);
+                status = HttpStatus.OK;
+            }else {
+                status = HttpStatus.NOT_FOUND;
+            }
 
 
-            return new ResponseEntity<>(invoiceContent, headers, HttpStatus.OK);
+            return new ResponseEntity<>(headers, status);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -118,7 +126,7 @@ public class InvoiceController {
             System.out.println(" [x] Sent '" + message + "'");
         }
     }
-
+/*
     private boolean isPdfAvailable = false;
 
     //Method for checking the availability of the Pdf every 2 sec
@@ -144,7 +152,7 @@ public class InvoiceController {
 
         return false;
     }
-
+*/
 
 
 }
