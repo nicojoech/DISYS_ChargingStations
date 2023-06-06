@@ -21,16 +21,19 @@ public class DataCollectionService {
         this.mapper = mapper;
     }
 
+    //starts second Subscriber (waits for actual data)
     public void gatherData(String input) throws IOException, TimeoutException {
         SubscriberData.receive(Integer.parseInt(input), this);
     }
 
+    //writes received input to a list, this list is appended to the overall chargeInfoList
     public void writeMsgToList(String msg) throws JsonProcessingException {
         List<ChargeInfo> chargeInfoOneMessage = mapper.readValue(msg, new TypeReference<>() {});
         chargeInfoList.addAll(chargeInfoOneMessage);
 
     }
 
+    //gets called when all messages are received, chargeInfoList gets formatted as a JSON String again and is published
     public void formatAndPublish() throws JsonProcessingException {
         String output = mapper.writeValueAsString(chargeInfoList);
         Publisher.send("completeDataQueue", output);

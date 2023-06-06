@@ -27,6 +27,8 @@ public class Subscriber {
 
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+
+            //process starts when gathered Data is received (as JSON String)
             String message = new String(delivery.getBody(), "UTF-8");
 
             try {

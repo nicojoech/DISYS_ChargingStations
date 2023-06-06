@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 public class Database {
 
+    //establishes connection to the postgres DB running in a docker container
+
     private final static String DRIVER = "postgresql";
     private final static String HOST = "localhost";
     private final static int PORT = 30001;

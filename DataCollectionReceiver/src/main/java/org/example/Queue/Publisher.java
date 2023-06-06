@@ -19,6 +19,7 @@ public class Publisher {
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel()
         ) {
+            //publishes gathered data list
             channel.queueDeclare(queueName, false, false, false, null);
             channel.basicPublish("", queueName, null, message.getBytes());
             System.out.println("Sent: \n" + message);

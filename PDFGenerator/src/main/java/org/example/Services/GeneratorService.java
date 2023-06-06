@@ -33,8 +33,11 @@ import java.util.stream.Stream;
 
 public class GeneratorService {
 
+    //defined DecimalFormat to display money amounts with 2 decimals
     private static final DecimalFormat dfZero = new DecimalFormat("0.00");
 
+
+    //gathers Data --> json String is converted to list again, new Customer gets created related to the customer_id
     public void gatherData(String jsonInput) throws JsonProcessingException, DocumentException, FileNotFoundException {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -47,6 +50,7 @@ public class GeneratorService {
 
     }
 
+    //returns new Customer Object with id from user input (id, first name and last name are set with the help of a DB query)
     public Customer getCustomerFromDB(int id){
 
         Customer customer = new Customer();
@@ -74,34 +78,43 @@ public class GeneratorService {
         return customer;
     }
 
+    //PDF is created when information is complete
     public void createPDF(List<ChargeInfo> datalist, Customer customer) throws FileNotFoundException, DocumentException {
         Document document = new Document();
 
+        //path where PDFs are saved
         Path basePath = Paths.get("").toAbsolutePath();
         Path path = basePath.resolve("PDFGenerator").resolve("createdInvoices").resolve(customer.getId()+".pdf");
 
         PdfWriter.getInstance(document, new FileOutputStream(path.toFile()));
 
         document.open();
+
+        //set fonts for different paragraphs
         Font font = FontFactory.getFont(FontFactory.COURIER, 22, BaseColor.BLACK);
         Font fontLittle = FontFactory.getFont(FontFactory.COURIER, 12, BaseColor.BLACK);
         Font fontBold = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD);
 
+        //add heading
         Chunk heading = new Chunk("Invoice - " + customer.getFirst_name() + " " + customer.getLast_name(), font);
         document.add(heading);
 
+        //add line separator
         Chunk linebreak = new Chunk(new LineSeparator());
         Paragraph dottedLine = new Paragraph(linebreak);
         document.add(dottedLine);
 
+        //add empty line
         document.add( Chunk.NEWLINE );
 
+        //add new text paragraph
         Chunk intro = new Chunk("Following tank loads must be paid:", fontLittle);
         Paragraph p1 = new Paragraph(intro);
         document.add(p1);
 
         document.add( Chunk.NEWLINE );
 
+        //adds table (functions inspired by: https://www.baeldung.com/java-pdf-creation)
         PdfPTable table = new PdfPTable(2);
         addTableHeader(table);
         addRows(table, datalist);
@@ -109,20 +122,20 @@ public class GeneratorService {
 
         document.add( Chunk.NEWLINE );
 
+        //adds customer information
         Chunk customerId = new Chunk("Customer-ID: " + customer.getId(), fontLittle);
         Paragraph p2 = new Paragraph(customerId);
         document.add(p2);
-
         Chunk name = new Chunk("Name: " + customer.getFirst_name() + " " + customer.getLast_name(), fontLittle);
         Paragraph p3 = new Paragraph(name);
         document.add(p3);
 
         document.add( Chunk.NEWLINE );
 
+        //adds money amounts
         Chunk price = new Chunk("Price per kilowatt hour: 0.48 €", fontLittle);
         Paragraph p4 = new Paragraph(price);
         document.add(p4);
-
         Chunk priceTotal = new Chunk("Total amount: " + getTotalAmount(datalist) + " €", fontBold);
         Paragraph p5 = new Paragraph(priceTotal);
         document.add(p5);
@@ -134,6 +147,7 @@ public class GeneratorService {
         Calendar obj = Calendar.getInstance();
         String dateString = formatter.format(obj.getTime());
 
+        //adds creation date
         Chunk date = new Chunk("Created on: " + dateString, fontLittle);
         Paragraph p6 = new Paragraph(date);
         document.add(p6);
@@ -142,6 +156,7 @@ public class GeneratorService {
         document.close();
     }
 
+    //adds table header with specific styling (background colour, border, etc.)
     private void addTableHeader(PdfPTable table) {
         Stream.of("Invoice-ID", "Kilowatt-hours")
                 .forEach(columnTitle -> {
@@ -153,6 +168,7 @@ public class GeneratorService {
                 });
     }
 
+    //adds rows with user data (Invoice-Id and kwh)
     private void addRows(PdfPTable table, List<ChargeInfo> list) {
 
         for(ChargeInfo element : list){
@@ -161,9 +177,8 @@ public class GeneratorService {
         }
     }
 
+    //calculates total amount for payment
     private String getTotalAmount(List<ChargeInfo> list){
-
-
 
         float sum = 0;
         for(ChargeInfo element : list){
@@ -171,7 +186,6 @@ public class GeneratorService {
         }
 
         return dfZero.format(sum);
-
     }
 
 

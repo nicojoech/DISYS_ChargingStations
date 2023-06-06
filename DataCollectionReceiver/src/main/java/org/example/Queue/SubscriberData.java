@@ -27,11 +27,15 @@ public class SubscriberData {
             public void handleDelivery(String consumerTag, Envelope envelope,
                                        AMQP.BasicProperties properties, byte[] body) throws IOException {
 
+                //receives data of a specific customer for a specific charging station (as Json String)
                 String message = new String(body, "UTF-8");
+
+                //writes string to a private list of the dataCollectionService
                 dataCollectionService.writeMsgToList(message);
                 System.out.println("Received message: " + message);
                 messageCount++;
 
+                //if all messages have been received the final list is formatted and published to the PDFService
                 if (messageCount == number) {
                     dataCollectionService.formatAndPublish();
                     messageCount = 0;

@@ -24,6 +24,7 @@ public class SubscriberNumber {
             public void handleDelivery(String consumerTag, Envelope envelope,
                                        AMQP.BasicProperties properties, byte[] body) throws IOException {
 
+                //receives number of messages that should be waited for
                 String message = new String(body, "UTF-8");
                 try {
                     dataCollectionService.gatherData(message);
