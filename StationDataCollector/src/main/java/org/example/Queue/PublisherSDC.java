@@ -15,8 +15,8 @@ public class PublisherSDC {
         factory.setPort(30003);
 
         try (
-                Connection connection = factory.newConnection();
-                Channel channel = connection.createChannel()
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
         ) {
             //publishes gathered data list
             channel.queueDeclare(queueName, false, false, false, null);

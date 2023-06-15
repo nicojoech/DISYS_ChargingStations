@@ -14,7 +14,7 @@ public class StationDB {
     private final static String DRIVER = "postgresql";
     private final static String HOST = "localhost";
     private static int PORT;
-    private final static String DATABASE_NAME = "customerdb";
+    private final static String DATABASE_NAME = "stationdb";
     private final static String USERNAME = "postgres";
     private final static String PASSWORD = "postgres";
 

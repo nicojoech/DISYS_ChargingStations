@@ -9,8 +9,8 @@ public class StationsDB {
 
     private final static String DRIVER = "postgresql";
     private final static String HOST = "localhost";
-    private final static int PORT = 30083;
-    private final static String DATABASE_NAME = "customerdb";
+    private final static int PORT = 30002;
+    private final static String DATABASE_NAME = "stationdb";
     private final static String USERNAME = "postgres";
     private final static String PASSWORD = "postgres";
 

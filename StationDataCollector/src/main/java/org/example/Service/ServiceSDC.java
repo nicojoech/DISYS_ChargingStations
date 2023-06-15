@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.DocumentException;
 import org.example.Model.ChargeInfoSDC;
 import org.example.Model.StationDB;
-import org.example.Models.ChargeInfo;
+//import org.example.Models.ChargeInfo;
 import org.example.Queue.PublisherSDC;
 
 import java.sql.Connection;
@@ -29,7 +29,7 @@ public class ServiceSDC {
         List<ChargeInfoSDC> chargeInfoList = new ArrayList<>();
         StationDB stationDB = new StationDB();
         stationDB.setPORT(Integer.parseInt(port));
-        String query = "SELECT id, kwh FROM charge WHERE customer_id = ?";
+        String query = "SELECT id, kwh, customer_id FROM charge WHERE customer_id = ?";
         try(Connection conn = stationDB.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, Integer.parseInt(customerId));
@@ -37,9 +37,9 @@ public class ServiceSDC {
 
             while (rs.next()) {
 
-                info.setId(Integer.parseInt(customerId));
+                info.setId(rs.getInt("id"));
                 info.setKwh(String.valueOf(rs.getFloat("kwh")));
-                info.setKwh(String.valueOf(rs.getInt("id")));
+                info.setCustomer_id(rs.getInt("customer_id"));
                 chargeInfoList.add(info);
 
                 info = new ChargeInfoSDC();

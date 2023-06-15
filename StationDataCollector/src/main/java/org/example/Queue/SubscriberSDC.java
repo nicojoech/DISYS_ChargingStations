@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 
 public class SubscriberSDC {
 
-    private final static String queueName = "DataCollectionDispatcher";
+    private final static String queueName = "dataToCollect";
     public static void receive(ServiceSDC serviceSDC) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");

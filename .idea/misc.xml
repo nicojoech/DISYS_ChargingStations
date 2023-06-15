@@ -6,8 +6,8 @@
         <option value="$PROJECT_DIR$/JavaFX/pom.xml" />
         <option value="$PROJECT_DIR$/SpringBoot/pom.xml" />
         <option value="$PROJECT_DIR$/PDFGenerator/pom.xml" />
-        <option value="$PROJECT_DIR$/StationDataCollector/pom.xml" />
         <option value="$PROJECT_DIR$/DataCollectionReceiver/pom.xml" />
+        <option value="$PROJECT_DIR$/StationDataCollector/pom.xml" />
         <option value="$PROJECT_DIR$/DataCollectionDispatcher/pom.xml" />
       </list>
     </option>

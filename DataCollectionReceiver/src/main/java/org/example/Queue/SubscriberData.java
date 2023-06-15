@@ -8,6 +8,7 @@ import java.util.concurrent.TimeoutException;
 
 public class SubscriberData {
     private final static String queueName = "dataGatheringQueue";
+    private static int messageCount = 0;
 
     public static void receive(int number, DataCollectionService dataCollectionService) throws IOException, TimeoutException {
 
@@ -21,7 +22,6 @@ public class SubscriberData {
         channel.queueDeclare(queueName, false, false, false, null);
 
         DefaultConsumer consumer = new DefaultConsumer(channel) {
-            private int messageCount = 0;
 
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope,
@@ -34,6 +34,8 @@ public class SubscriberData {
                 dataCollectionService.writeMsgToList(message);
                 System.out.println("Received message: " + message);
                 messageCount++;
+
+                System.out.println("Current message count: " + messageCount);
 
                 //if all messages have been received the final list is formatted and published to the PDFService
                 if (messageCount == number) {
