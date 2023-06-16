@@ -1,4 +1,5 @@
-DISYS_ChargingStation Documentation, Lessons learned, Unit test decisions, GIT link, tracked time. 
+DISYS_ChargingStation 
+Documentation, Lessons learned, Unit test decisions, GIT link, tracked time. 
 
 
 Folder Structure: 
@@ -9,6 +10,8 @@ Folder Structure:
 		- PDFGenerator
 		- SpringBoot
 		- StationDataCollector
+
+
 
 To Run the code: 
 	Start the Database in Docker, with "docker compose up" in cmd
@@ -43,6 +46,9 @@ Unit test decisions
 
 
 GIT link: https://github.com/nicojoech/DISYS_ChargingStations
+
+
+
 
 Tracked time/rolls in project: 
 	Clemens: Documentaion, DataCollectionDispatcher, StationDataCollector
