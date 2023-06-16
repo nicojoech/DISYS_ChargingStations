@@ -26,6 +26,13 @@ public class HelloController {
     @FXML
     protected void generateInvoice() throws URISyntaxException, IOException, InterruptedException {
         try {
+            //If there are letters in the input, break
+            if(customerId.getText().matches(".*\\D.*")){
+                invoiceText.setText("Only Numbers allowed");
+                customerId.setText("");
+                return;
+            }
+
             //URL des Empfängers
             String url = "http://localhost:8081/invoices";
 
@@ -75,17 +82,20 @@ public class HelloController {
     @FXML
     protected void getInvoice() throws URISyntaxException, IOException, InterruptedException {
 
+        //If there are letters in the input, break
+        if(customerId.getText().matches(".*\\D.*")){
+            invoiceText.setText("Only Numbers allowed");
+            customerId.setText("");
+            return;
+        }
+
        timeline = new Timeline(
                 new KeyFrame(Duration.seconds(5) , event -> {
 
                     try {
                         handleGetInvoice();
-                    } catch (URISyntaxException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
 
                 })
