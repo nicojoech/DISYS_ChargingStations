@@ -28,6 +28,11 @@ public class DataCollectionService {
 
     //writes received input to a list, this list is appended to the overall chargeInfoList
     public void writeMsgToList(String msg) throws JsonProcessingException {
+
+        /*System.out.println(msg);
+        if (msg.equals("[]")){
+            return;
+        }*/
         List<ChargeInfo> chargeInfoOneMessage = mapper.readValue(msg, new TypeReference<>() {});
         chargeInfoList.addAll(chargeInfoOneMessage);
 

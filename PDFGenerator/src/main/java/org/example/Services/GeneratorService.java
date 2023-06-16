@@ -40,11 +40,20 @@ public class GeneratorService {
     //gathers Data --> json String is converted to list again, new Customer gets created related to the customer_id
     public void gatherData(String jsonInput) throws JsonProcessingException, DocumentException, FileNotFoundException {
 
+        /*if (jsonInput.equals("[]")){
+            System.out.println("leerer String");
+            return;
+        }
+
+        System.out.println("json erhalten");*/
+
         ObjectMapper mapper = new ObjectMapper();
         List<ChargeInfo> chargeInfoList = mapper.readValue(jsonInput, new TypeReference<>() {});
 
         int customerId = chargeInfoList.get(0).getCustomer_id();
         Customer customer = getCustomerFromDB(customerId);
+
+
 
         createPDF(chargeInfoList, customer);
 
