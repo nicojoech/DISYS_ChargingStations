@@ -52,4 +52,4 @@ GIT link: https://github.com/nicojoech/DISYS_ChargingStations
 
 Tracked time/rolls in project: 
 	Clemens: Documentaion, DataCollectionDispatcher, StationDataCollector
-		- Time: hard to exactly track without knowing we had to do it at the start of this course. Only for project writing: ~10 Hours
+		- Time: hard to exactly track without knowing we had to do it at the start of this course. Only for project coding: ~10 Hours
