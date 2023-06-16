@@ -49,21 +49,22 @@ public class ServiceSDC {
             System.out.println(e.getMessage());
         }
 
-        convertToJson(chargeInfoList);
+        PublisherSDC.send("dataGatheringQueue", convertToJson(chargeInfoList));
 
     }
 
-    private void convertToJson(List<ChargeInfoSDC> chargeInfoList) {
+    public String convertToJson(List<ChargeInfoSDC> chargeInfoList) {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = null;
         try {
             json = objectMapper.writeValueAsString(chargeInfoList);
-            System.out.println("JSON: " + json);
+            //System.out.println("JSON: " + json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        PublisherSDC.send("dataGatheringQueue", json);
+        return json;
+        //PublisherSDC.send("dataGatheringQueue", json);
     }
 
 

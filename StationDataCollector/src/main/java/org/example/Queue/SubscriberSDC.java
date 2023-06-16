@@ -24,12 +24,13 @@ public class SubscriberSDC {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            System.out.println(" [x] Received '" + message + "'");
             try {
                 serviceSDC.gatherData(message);
             } catch (DocumentException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println(" [x] Received '" + message + "'");
+
         };
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
     }

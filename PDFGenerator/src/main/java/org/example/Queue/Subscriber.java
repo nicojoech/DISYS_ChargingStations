@@ -30,13 +30,12 @@ public class Subscriber {
 
             //process starts when gathered Data is received (as JSON String)
             String message = new String(delivery.getBody(), "UTF-8");
-
+            System.out.println(" [x] Received '" + message + "'");
             try {
                 generatorService.gatherData(message);
             } catch (DocumentException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println(" [x] Received '" + message + "'");
 
         };
 

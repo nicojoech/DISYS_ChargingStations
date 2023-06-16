@@ -161,10 +161,12 @@ public class GeneratorService {
 
 
         document.close();
+
+        System.out.println("Created PDF \"" + customer.getId() + ".pdf\"");
     }
 
     //adds table header with specific styling (background colour, border, etc.)
-    private void addTableHeader(PdfPTable table) {
+    public void addTableHeader(PdfPTable table) {
         Stream.of("Invoice-ID", "Kilowatt-hours")
                 .forEach(columnTitle -> {
                     PdfPCell header = new PdfPCell();
@@ -176,7 +178,7 @@ public class GeneratorService {
     }
 
     //adds rows with user data (Invoice-Id and kwh)
-    private void addRows(PdfPTable table, List<ChargeInfo> list) {
+    public void addRows(PdfPTable table, List<ChargeInfo> list) {
 
         for(ChargeInfo element : list){
             table.addCell(Integer.toString(element.getId()));
@@ -185,7 +187,7 @@ public class GeneratorService {
     }
 
     //calculates total amount for payment
-    private String getTotalAmount(List<ChargeInfo> list){
+    public String getTotalAmount(List<ChargeInfo> list){
 
         float sum = 0;
         for(ChargeInfo element : list){

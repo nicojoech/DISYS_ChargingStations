@@ -35,8 +35,6 @@ public class SubscriberData {
                 System.out.println("Received message: " + message);
                 messageCount++;
 
-                System.out.println("Current message count: " + messageCount);
-
                 //if all messages have been received the final list is formatted and published to the PDFService
                 if (messageCount == number) {
                     dataCollectionService.formatAndPublish();
