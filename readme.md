@@ -49,6 +49,14 @@ Nico:
 - Develop "loosely" coupled services
 - Test code through Unit Tests
 
+Florian:
+- Learning how to programm a API wich can be called by another Program (JavaFx)
+- Implementing different programms, wich are communicating just over the message Queue
+- Find out how so send and handle POST Requests with Springboot
+- Learn how to build a frontend program with JavaFx, which does something in the background, without knowing what exactly.
+- Learned how to use Docker
+
+
 
 ### Unit test decisions
 
@@ -89,7 +97,7 @@ Unit Tests, DataCollectionReceiver, PDFGenerator
 Time: coding + creating unit tests + debugging ~20 hours
 
 #### Florian:
+SpringBoot, JavaFx, UML Modelling
 
-...
+Time: Coding + Modelling + Meetings ~ 10 hours
 
-Time: ... ~ hours

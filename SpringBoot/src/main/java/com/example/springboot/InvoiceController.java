@@ -36,14 +36,14 @@ public class InvoiceController {
     public Long generateInvoice(@RequestBody Invoice invoice) throws IOException, TimeoutException {
         Long customerId = invoice.getCustomerId();
 
-        //Invoice generieren mit anderen Services
+        //Send customerId to the DataCollection Dispatcher
         sendMessage("DataCollectionDispatcher", String.valueOf(customerId));
 
 
         return customerId;
     }
 
-    //GET Mapping for retourning the generated invoice, if available
+    //GET Mapping for returning the generated invoice, if available, else status 404
     @GetMapping("/invoices/{customerId}")
 
     public ResponseEntity getInvoice(@PathVariable String customerId) {
@@ -62,31 +62,18 @@ public class InvoiceController {
         //set File path
         File invoiceFile = new File(filePathString);
 
-        // check the availability, if not available return HTTP 404
-       /* if (!invoiceFile.exists()) {
-        //if (!checkPdfAvailability(filePathString)) {
-            System.out.println("Nicht verfügbar");
-
-            //return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "entity not found"
-            );
-
-        }*/
-
         try {
 
-            //byte[] invoiceContent = Files.readAllBytes(path);
-
+            //Create new http header and status
             HttpHeaders headers = new HttpHeaders();
             HttpStatus status;
 
+            //Check if Invoice pdf exists
             if (invoiceFile.exists()) {
                 headers.setContentType(MediaType.APPLICATION_PDF);
                 headers.setContentDispositionFormData("attachment", customerId + ".pdf");
 
-                //LocalDateTime creationTime = LocalDateTime.now();
-
+                //Get the information out of the file Attributes
                 BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
 
                 // Convert FileTime to LocalDateTime
@@ -97,7 +84,7 @@ public class InvoiceController {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss, dd.MM.yyyy");
                 String formattedCreationTime = creationTime.format(formatter);
 
-                //Set headers to return the informaions
+                //Set headers to return the information
                 headers.set("creationTime", formattedCreationTime);
                 headers.set("filePath", filePathString);
                 status = HttpStatus.OK;
@@ -105,7 +92,7 @@ public class InvoiceController {
                 status = HttpStatus.NOT_FOUND;
             }
 
-
+            //Return information about the file
             return new ResponseEntity<>(headers, status);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,7 +100,7 @@ public class InvoiceController {
 
     }
 
-    //Method for sending Messages to the Queue
+    //Method for sending Message to the Queue
     public void sendMessage (String QUEUE_NAME, String message) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
@@ -126,33 +113,6 @@ public class InvoiceController {
             System.out.println(" [x] Sent '" + message + "'");
         }
     }
-/*
-    private boolean isPdfAvailable = false;
-
-    //Method for checking the availability of the Pdf every 2 sec
-    @Scheduled(fixedDelay = 2000)
-    public boolean checkPdfAvailability(String filePath) {
-
-        //checks, if bool is true, when yes, return true;
-        if (isPdfAvailable) {
-            System.out.println("true");
-            return true;
-        }
-
-        //Sets the file path of the file to check
-        File invoiceFile = new File(filePath);
-
-        // starts the method to check the availability, if available return true
-        if (invoiceFile.exists()) {
-            isPdfAvailable = true;
-
-        }
-        //pdf was not availabe, return false and restart method in 2 sec.
-        System.out.println("false");
-
-        return false;
-    }
-*/
 
 
 }
