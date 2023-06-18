@@ -10,6 +10,7 @@ public class SubscriberData {
     private final static String queueName = "dataGatheringQueue";
     private static int messageCount = 0;
 
+    //https://www.rabbitmq.com/tutorials/tutorial-one-java.html - default setup of sender and receiver
     public static void receive(int number, DataCollectionService dataCollectionService) throws IOException, TimeoutException {
 
         ConnectionFactory factory = new ConnectionFactory();

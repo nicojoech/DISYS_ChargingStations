@@ -85,6 +85,7 @@ public class GeneratorService {
         return customer;
     }
 
+    //https://www.baeldung.com/java-pdf-creation - used predefined functions addTableHeader() and addRows()
     //PDF is created when information is complete
     public void createPDF(List<ChargeInfo> datalist, Customer customer) throws FileNotFoundException, DocumentException {
         Document document = new Document();
