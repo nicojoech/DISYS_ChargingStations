@@ -1,1 +1,0 @@
-All created invoices can be found in this directory.
