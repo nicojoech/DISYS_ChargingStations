@@ -9,6 +9,7 @@ import java.util.concurrent.TimeoutException;
 
 public class Publisher {
 
+    //https://www.rabbitmq.com/tutorials/tutorial-one-java.html - default setup of sender and receiver
     public static void send(String queueName, String message) {
 
         ConnectionFactory factory = new ConnectionFactory();

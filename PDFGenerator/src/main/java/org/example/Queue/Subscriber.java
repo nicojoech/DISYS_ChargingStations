@@ -13,6 +13,8 @@ import java.util.concurrent.TimeoutException;
 public class Subscriber {
 
     private final static String queueName = "completeDataQueue";
+
+    //https://www.rabbitmq.com/tutorials/tutorial-one-java.html - default setup of sender and receiver
     public static void receive(GeneratorService generatorService) throws IOException, TimeoutException {
 
         ConnectionFactory factory = new ConnectionFactory();

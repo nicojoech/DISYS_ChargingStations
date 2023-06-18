@@ -8,6 +8,8 @@ import java.util.concurrent.TimeoutException;
 
 public class SubscriberNumber {
     private final static String queueName = "messageInfoQueue";
+
+    //https://www.rabbitmq.com/tutorials/tutorial-one-java.html - default setup of sender and receiver
     public static void receive(DataCollectionService dataCollectionService) throws IOException, TimeoutException {
 
         ConnectionFactory factory = new ConnectionFactory();
