@@ -24,7 +24,12 @@ public class HelloController {
     @FXML
     private TextField customerId;
 
-    //Method for starting the data gathering Job with REST POST
+    /*Method for starting the data gathering Job with REST POST
+    Recources:
+    https://www.baeldung.com/rest-http-put-vs-post
+    https://howtodoinjava.com/spring-mvc/controller-getmapping-postmapping/
+    https://stackoverflow.com/questions/3324717/sending-http-post-request-in-java
+    */
     @FXML
     protected void generateInvoice() throws URISyntaxException, IOException, InterruptedException {
         try {

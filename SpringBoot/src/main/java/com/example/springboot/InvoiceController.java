@@ -87,7 +87,11 @@ public class InvoiceController {
                 //Set headers to return the information
                 headers.set("creationTime", formattedCreationTime);
                 headers.set("filePath", filePathString);
+
+                //Returning Http Status
+                // Resource: https://stackoverflow.com/questions/25422255/how-to-return-404-response-status-in-spring-boot-responsebody-method-return-t
                 status = HttpStatus.OK;
+
             }else {
                 status = HttpStatus.NOT_FOUND;
             }
